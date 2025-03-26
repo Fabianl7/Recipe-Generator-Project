@@ -1,4 +1,5 @@
 import "dotenv/config";
+console.log("✅ Loaded API KEY:", process.env.API_KEY);
 import express from "express";
 import fetch from "node-fetch"; // ✅ Native fetch for Node.js 18+
 import path from "path";
