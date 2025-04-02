@@ -36,7 +36,7 @@ app.use(passport.session());
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "https://cis4004-recipe-generator-b6cd2b2ee84e.herokuapp.com/auth/google"
+  callbackURL: "https://cis4004-recipe-generator-b6cd2b2ee84e.herokuapp.com/auth/google/callback"
 }, async (accessToken, refreshToken, profile, done) => {
   try {
     let existingUser = await User.findOne({ googleId: profile.id });
