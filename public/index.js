@@ -1,45 +1,63 @@
-// console.log('hello world');
+let isLoggedIn = false;
 
-// const { readFile, readFileSync } = require('fs');
+window.addEventListener("DOMContentLoaded", async () => {
+  const res = await fetch("/api/user");
+  const data = await res.json();
+  isLoggedIn = data.loggedIn;
 
-// const txt = readFileSync('./hello.txt', 'utf-8');
+  const input = document.getElementById("ingredientInput");
+  const button = document.getElementById("searchBtn");
+  const authDiv = document.getElementById("authStatus");
 
-// console.log(txt)
-// console.log('do this')
+  if (isLoggedIn) {
+    input.disabled = false;
+    button.disabled = false;
+    authDiv.innerHTML = `
+      ✅ Logged in as ${data.name} (${data.email}) 
+      <a href="/logout">Logout</a>
+    `;
+  } else {
+    input.disabled = true;
+    button.disabled = true;
+    authDiv.innerHTML = `
+      ❌ Not logged in 
+      <a href="/auth/google">Login with Google</a>
+    `;
+  }
+});
 
 async function getRecipes() {
-    if (!isLoggedIn) {
-        alert("Please log in to search for recipes.");
-        return;
-    }
-    
-    const ingredient = document.getElementById("ingredientInput").value;
-    if (!ingredient) {
-        alert("Please enter an ingredient!");
-        return;
-    }
+  if (!isLoggedIn) {
+    alert("Please log in to search for recipes.");
+    return;
+  }
 
-    const response = await fetch(`/api/recipes?ingredient=${ingredient}`);
-    const data = await response.json();
+  const ingredient = document.getElementById("ingredientInput").value;
+  if (!ingredient) {
+    alert("Please enter an ingredient!");
+    return;
+  }
 
-    const resultsDiv = document.getElementById("recipeResults");
-    resultsDiv.innerHTML = "";  // Clear previous results
+  const response = await fetch(`/api/recipes?ingredient=${ingredient}`);
+  const data = await response.json();
 
-    if (data.length === 0) {
-        resultsDiv.innerHTML = "<p>No recipes found.</p>";
-        return;
-    }
+  const resultsDiv = document.getElementById("recipeResults");
+  resultsDiv.innerHTML = "";  // Clear previous results
 
-    data.forEach(recipe => {
-        const recipeDiv = document.createElement("div");
-        recipeDiv.classList.add("recipe");
+  if (data.length === 0) {
+    resultsDiv.innerHTML = "<p>No recipes found.</p>";
+    return;
+  }
 
-        recipeDiv.innerHTML = `
-            <h3>${recipe.title}</h3>
-            <img src="${recipe.image}" alt="${recipe.title}">
-            <p><a href="https://spoonacular.com/recipes/${recipe.title.replace(/ /g, "-")}-${recipe.id}" target="_blank">View Recipe</a></p>
-        `;
-        resultsDiv.appendChild(recipeDiv);
-    });
+  data.forEach(recipe => {
+    const recipeDiv = document.createElement("div");
+    recipeDiv.classList.add("recipe");
+
+    recipeDiv.innerHTML = `
+      <h3>${recipe.title}</h3>
+      <img src="${recipe.image}" alt="${recipe.title}">
+      <p><a href="https://spoonacular.com/recipes/${recipe.title.replace(/ /g, "-")}-${recipe.id}" target="_blank">View Recipe</a></p>
+    `;
+    resultsDiv.appendChild(recipeDiv);
+  });
 }
-
