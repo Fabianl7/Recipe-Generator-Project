@@ -14,7 +14,12 @@
     "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
-    "node-fetch": "^3.3.2"
+    "express-session": "^1.18.1",
+    "mongodb": "^6.15.0",
+    "mongoose": "^8.13.1",
+    "node-fetch": "^3.3.2",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0"
   },
   "devDependencies": {
     "jest": "^29.7.0"
