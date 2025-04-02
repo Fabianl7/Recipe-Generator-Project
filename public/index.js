@@ -8,6 +8,11 @@
 // console.log('do this')
 
 async function getRecipes() {
+    if (!isLoggedIn) {
+        alert("Please log in to search for recipes.");
+        return;
+    }
+    
     const ingredient = document.getElementById("ingredientInput").value;
     if (!ingredient) {
         alert("Please enter an ingredient!");
