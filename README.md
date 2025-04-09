@@ -1,121 +1,134 @@
-# 🍳 Recipe Generator Project
+# Recipe Generator
 
-A web application that allows users to search for recipes based on ingredients using the Spoonacular API.
-
-Built with Node.js, Express, EJS, and fetch. Deployed on Heroku.
+A full-stack web app that allows users to log in with Google and search for recipes based on ingredients using the Spoonacular API.
 
 ---
 
-## 📁 Project Structure
+## 🌐 Live Demo
 
-```
-RecipeGeneratorProject/
-├── public/            # Static assets
-│   ├── styles.css
-│   └── index.js
-│   └── home.html
-├── .env               # Environment variables (NOT committed)
-├── .gitignore
-├── package.json
-├── package-lock.json
-├── server.js          # Express server
-├── test.js
-├── Procfile
-├── README.md
-```
+Visit the app here:  
+https://cis4004-recipe-generator-b6cd2b2ee84e.herokuapp.com
+
+---
+
+## 🛠 Tech Stack
+
+| Layer                | Tech Used                                      |
+|----------------------|------------------------------------------------|
+| Front-End            | HTML, CSS, Vanilla JavaScript                  |
+| HTTP Server          | Node.js with Express.js                        |
+| Database             | MongoDB Atlas (with Mongoose)                  |
+| Authentication       | Google OAuth 2.0 (via Passport.js)             |
+| External API         | Spoonacular Recipe API                         |
+| Deployment Platform  | Heroku                                         |
 
 ---
 
 ## 🚀 Features
 
-- Enter an ingredient to get a list of recipes from the Spoonacular API.
-- Responsive UI with basic styling.
-- Deployed and testable on Heroku.
-- Unit tests with Jest.
+- Users can log in using Google
+- Logged-in users can search for recipes by ingredient
+- Results fetched live from Spoonacular API
+- User sessions are managed using Passport
+- MongoDB used to store authenticated users
+- Clean UI with disabled functionality for guests
 
 ---
 
-## 🔧 Getting Started (Local Development)
+## ⚙️ How to Run Locally
 
-### 1. **Clone the Repository**
+### 1. Clone the repository
+
 ```bash
 git clone https://github.com/your-username/Recipe-Generator-Project.git
 cd Recipe-Generator-Project
 ```
 
-### 2. **Install Dependencies**
+### 2. Install dependencies
+
 ```bash
 npm install
 ```
 
-### 3. **Set Up Environment Variables**
-
-Create a `.env` file in the root of the project with the following:
+### 3. Create a `.env` file in the root directory:
 
 ```
 API_KEY=your_spoonacular_api_key
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+SESSION_SECRET=any_random_string
+MONGO_URI=your_mongodb_atlas_connection_string
 ```
 
-> 🔐 **Never commit `.env` to GitHub.**
+> ⚠️ For Google OAuth, make sure you've added these redirect URIs in the Google Cloud Console:
+>
+> - http://localhost:3000/auth/google/callback
+> - https://your-heroku-app.herokuapp.com/auth/google/callback
 
-### 4. **Start the Server**
+### 4. Start the server
+
 ```bash
 npm start
 ```
 
-Then open: [http://localhost:3000](http://localhost:3000)
+Then open:  
+http://localhost:3000
 
 ---
 
 ## ☁️ Deploying to Heroku
 
-### 1. **Create Heroku App**
-```bash
-heroku login
-heroku create your-app-name
-```
+### 1. Push code to Heroku
 
-### 2. **Set Environment Variable on Heroku**
 ```bash
-heroku config:set API_KEY=your_spoonacular_api_key
-```
-
-### 3. **Push Code to Heroku**
-```bash
+git add .
+git commit -m "Deploying"
 git push heroku main
 ```
 
-### 4. **Open the App**
+### 2. Set environment variables on Heroku
+
+```bash
+heroku config:set API_KEY=your_spoonacular_api_key
+heroku config:set GOOGLE_CLIENT_ID=your_google_client_id
+heroku config:set GOOGLE_CLIENT_SECRET=your_google_client_secret
+heroku config:set SESSION_SECRET=any_random_string
+heroku config:set MONGO_URI=your_mongodb_atlas_connection_string
+```
+
+### 3. Allow Heroku IPs to access MongoDB Atlas
+
+In MongoDB Atlas → Network Access → IP Access List:  
+Add this IP rule:
+```
+0.0.0.0/0
+```
+
+Then:
 ```bash
 heroku open
 ```
 
----
-
-## ✅ Running Tests
-
-Tests use [Jest](https://jestjs.io/).
-
-To run tests:
-
-```bash
-npm test
-```
+ 
+YouTube Demo: [link once available]
 
 ---
 
-## 🧠 Notes for Team
+## 🤖 AI Usage Disclosure
 
-- Make sure your `.env` file is correctly configured locally.
-- Do **not** push `.env` to GitHub.
-- If you make changes, always push to both:
-  ```bash
-  git push origin main   # Push to GitHub
-  git push heroku main   # Deploy to Heroku
-  ```
+This project used the following AI tools during development and documentation:
+
+- ChatGPT (OpenAI GPT-4)
+  - Assisted in setup for OAuth 2.0, and writing the CSS
 
 ---
 
-## 💡 Credits
+## ✅ Project Requirements Covered
 
-Made by Team [Your Team Name Here] for CIS 4004 - Spring 2025 💻
+| Requirement                          | Implementation                            |
+|--------------------------------------|--------------------------------------------|
+| Web-based Interface via HTTP Server  | Express.js server + public HTML            |
+| Persistent Database                  | MongoDB Atlas + Mongoose                   |
+| External API                         | Spoonacular Recipe API                     |
+| Third-Party Authentication           | Google OAuth 2.0 via Passport.js           |
+
