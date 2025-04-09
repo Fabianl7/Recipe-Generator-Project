@@ -24,40 +24,47 @@ window.addEventListener("DOMContentLoaded", async () => {
       <a href="/auth/google">Login with Google</a>
     `;
   }
-});
 
-async function getRecipes() {
-  if (!isLoggedIn) {
-    alert("Please log in to search for recipes.");
-    return;
-  }
+  // ✅ Use event listener instead of onclick attribute
+  button.addEventListener("click", async () => {
+    if (!isLoggedIn) {
+      alert("Please log in to search for recipes.");
+      return;
+    }
 
-  const ingredient = document.getElementById("ingredientInput").value;
-  if (!ingredient) {
-    alert("Please enter an ingredient!");
-    return;
-  }
+    const ingredient = input.value.trim();
+    if (!ingredient) {
+      alert("Please enter an ingredient!");
+      return;
+    }
 
-  const response = await fetch(`/api/recipes?ingredient=${ingredient}`);
-  const data = await response.json();
+    const resultsDiv = document.getElementById("recipeResults");
+    resultsDiv.innerHTML = "<p class='loading'>Loading recipes...</p>";
 
-  const resultsDiv = document.getElementById("recipeResults");
-  resultsDiv.innerHTML = "";  // Clear previous results
+    try {
+      const response = await fetch(`/api/recipes?ingredient=${ingredient}`);
+      const data = await response.json();
 
-  if (data.length === 0) {
-    resultsDiv.innerHTML = "<p>No recipes found.</p>";
-    return;
-  }
+      resultsDiv.innerHTML = "";  // Clear previous results
 
-  data.forEach(recipe => {
-    const recipeDiv = document.createElement("div");
-    recipeDiv.classList.add("recipe");
+      if (data.length === 0) {
+        resultsDiv.innerHTML = "<p>No recipes found.</p>";
+        return;
+      }
 
-    recipeDiv.innerHTML = `
-      <h3>${recipe.title}</h3>
-      <img src="${recipe.image}" alt="${recipe.title}">
-      <p><a href="https://spoonacular.com/recipes/${recipe.title.replace(/ /g, "-")}-${recipe.id}" target="_blank">View Recipe</a></p>
-    `;
-    resultsDiv.appendChild(recipeDiv);
+      data.forEach(recipe => {
+        const recipeDiv = document.createElement("div");
+        recipeDiv.classList.add("recipe");
+
+        recipeDiv.innerHTML = `
+          <h3>${recipe.title}</h3>
+          <img src="${recipe.image}" alt="${recipe.title}">
+          <p><a href="https://spoonacular.com/recipes/${recipe.title.replace(/ /g, "-")}-${recipe.id}" target="_blank">View Recipe</a></p>
+        `;
+        resultsDiv.appendChild(recipeDiv);
+      });
+    } catch (err) {
+      resultsDiv.innerHTML = "<p>Something went wrong while fetching recipes.</p>";
+    }
   });
-}
+});
