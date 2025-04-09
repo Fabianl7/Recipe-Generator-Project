@@ -7,7 +7,7 @@ A full-stack web app that allows users to log in with Google and search for reci
 ## 🌐 Live Demo
 
 Visit the app here:  
-https://your-app-name.herokuapp.com/
+https://cis4004-recipe-generator-b6cd2b2ee84e.herokuapp.com
 
 ---
 
