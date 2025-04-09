@@ -1,0 +1,84 @@
+-Project Tech Stack & Requirement Coverage
+
+Overview
+
+The Recipe Generator Project is a full-stack web application that allows users to search for recipes based on ingredients. It integrates user authentication and persistent data storage and consumes an external recipe API.
+
+Tech Stack
+
+Layer                              | Technology / Tool
+-----------------------------------|-------------------------
+Front-end                          | HTML, CSS, JavaScript (Vanilla)
+Front-end Dynamic Behavior         | Fetch API + Client-Side JS
+Backend Framework                  | Node.js + Express.js
+Database                           | MongoDB (via MongoDB Atlas)
+Authentication                     | Google OAuth 2.0 via Passport.js
+External API Integration           | Spoonacular Recipe API
+Deployment Platform                | Heroku Cloud Platform
+
+Requirement Coverage
+
+1. Web-Based Interface + HTTP Server
+The app uses static HTML, CSS, and JavaScript files in the /public folder.
+These files are served to a web browser using the Express.js HTTP server.
+The interface accepts user input (ingredient names) and displays recipe results dynamically.
+
+Requirement: A web-based interface served via HTTP/web server → Covered
+
+2. Persistent Data Storage (Back-End Database)
+The app uses MongoDB Atlas to store persistent user data.
+When a user logs in via Google, their information (Google ID, name, email) is stored in the database.
+Mongoose ODM is used to interact with MongoDB.
+
+Requirement: A back-end database for persistent data → Covered (MongoDB)
+
+3. External API Usage
+The app integrates the Spoonacular Recipe API to fetch recipe data based on ingredients.
+User inputs an ingredient → Backend fetches data from the external API → Front-end displays the recipes.
+
+Requirement: Usage of an external API for supplementary data → Covered (Spoonacular API)
+
+4. Third-Party Authentication Scheme
+The app uses Google OAuth 2.0 Authentication via the Passport.js middleware.
+Users log in with their Google account.
+After login, their session is stored and they can access app features like searching recipes.
+Logout functionality is also provided.
+
+Requirement: A third-party authentication scheme (OAuth 2.0, OpenID, etc.) → Covered (Google OAuth 2.0)
+
+How it all works together
+
+1. Front-end (Public HTML/JS):
+- Displays the app interface
+- Disables recipe search until the user logs in
+- Shows "Logged in as..." after login
+
+2. Express.js Server:
+- Serves static front-end files
+- Provides API endpoints:
+  - /api/recipes → fetches data from Spoonacular API
+  - /api/user → sends login status to front-end
+
+3. MongoDB Atlas Database:
+- Stores authenticated user data
+- Automatically creates a new user document on first login
+
+4. Google OAuth 2.0:
+- Handles user authentication securely
+- Redirects back to app after login and creates a session
+
+5. Heroku Deployment:
+- Hosts the live version of the app
+- Environment variables (.env → API keys, DB URI, session secret) are securely set via heroku config:set
+
+In Summary
+
+Requirement                              | Technology Used
+----------------------------------------|-------------------------
+Web Server                              | Express.js HTTP server
+Database                                | MongoDB Atlas + Mongoose
+External API                            | Spoonacular Recipe API
+Authentication                          | Google OAuth 2.0 (via Passport.js)
+
+All project requirements are fully met.
+The project includes a functional front-end interface, a persistent database, third-party authentication, and external API integration, and is successfully deployed on Heroku.
