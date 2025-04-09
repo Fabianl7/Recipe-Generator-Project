@@ -27,6 +27,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
   // ✅ Use event listener instead of onclick attribute
   button.addEventListener("click", async () => {
+    console.log("🔍 Button clicked!");
     if (!isLoggedIn) {
       alert("Please log in to search for recipes.");
       return;
