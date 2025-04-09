@@ -1,52 +1,203 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #6f9e6f;
-    text-align: center;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
-    padding: 20px;
-}
-
-.container {
-    max-width: 600px;
-    margin: auto;
-    background: rgb(190, 182, 182);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-input {
-    width: 80%;
+    padding: 0;
+    background: #fef4e8;
+    color: #333;
+    transition: background-color 0.3s;
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.5s ease-in forwards;
+    opacity: 0;
+  }
+  
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+  
+  header {
+    background-color: #ffa500;
+    color: white;
+    padding: 15px 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    animation: slideDown 0.6s ease-out;
+  }
+  
+  @keyframes slideDown {
+    from {
+      transform: translateY(-50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .navbar h1 {
+    margin: 0;
+    font-size: 1.8em;
+    color: white;
+  }
+  
+  .logo {
+    height: 40px;
+    margin-right: 15px;
+    animation: rotateLogo 2s linear infinite;
+  }
+  
+  @keyframes rotateLogo {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .hero {
+    text-align: center;
+    padding: 40px 20px;
+    background: url('https://images.unsplash.com/photo-1543353071-087092ec393f') no-repeat center center/cover;
+    color: white;
+    animation: fadeIn 1s ease-in;
+  }
+  
+  .hero h2 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px #00000088;
+  }
+  
+  .hero p {
+    font-size: 1.2em;
+    text-shadow: 1px 1px 2px #00000088;
+  }
+  
+  .search-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    gap: 15px;
+  }
+  
+  #ingredientInput {
     padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-button {
-    padding: 10px 15px;
+    width: 300px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  #searchBtn {
+    padding: 10px 20px;
+    background-color: #ffa500;
+    color: white;
     border: none;
-    background: #28a745;
-    color: rgb(248, 248, 248);
-    font-size: 16px;
-    border-radius: 5px;
+    border-radius: 8px;
+    font-size: 1em;
     cursor: pointer;
-}
-
-button:hover {
-    background: #218838;
-}
-
-#recipeResults {
-    margin-top: 20px;
-}
-
-.recipe {
-    border-bottom: 1px solid #ddd;
-    padding: 10px 0;
-}
-
-.recipe img {
-    max-width: 100px;
+    transition: background 0.3s, transform 0.2s ease;
+  }
+  
+  #searchBtn:hover {
+    background-color: #ff8c00;
+    transform: scale(1.05);
+  }
+  
+  .results {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 30px;
+  }
+  
+  .recipe {
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .recipe:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  }
+  
+  .recipe img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+  
+  .recipe h3 {
+    margin: 0 0 10px;
+  }
+  
+  footer {
+    text-align: center;
+    padding: 20px;
+    background: #f4f4f4;
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 40px;
+  }
+  
+  .auth-buttons a, .login-button {
+    padding: 10px 15px;
+    background-color: #4285F4;
+    color: white;
+    text-decoration: none;
     border-radius: 5px;
-}
+    display: inline-block;
+    margin: 10px;
+    font-size: 0.95em;
+    transition: background 0.3s;
+  }
+  
+  .auth-buttons a:hover, .login-button:hover {
+    background-color: #3367D6;
+  }
+  
+  #authStatus {
+    font-size: 0.95em;
+    color: white;
+  }
+  
+  .loading {
+    text-align: center;
+    font-size: 1.2em;
+    color: #888;
+    margin-top: 20px;
+    animation: pulse 1s infinite;
+  }
+  
+  @keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+  }
+  
+  @media (max-width: 600px) {
+    .hero h2 {
+      font-size: 1.8em;
+    }
+  
+    #ingredientInput {
+      width: 80%;
+    }
+  
+    .search-section {
+      flex-direction: column;
+    }
+  }
+  

@@ -1,19 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipe Generator</title>
-    <link rel="stylesheet" href="/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recipe Generator</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1>Recipe Generator</h1>
-        <div id="authStatus"></div>
-        <input type="text" id="ingredientInput" placeholder="Enter an ingredient...">
-        <button id="searchBtn" onclick="getRecipes()">Get Recipes</button>
-        <div id="recipeResults"></div>
+  <header>
+    <div class="navbar">
+      <img src="https://cdn-icons-png.flaticon.com/512/1046/1046751.png" alt="Logo" class="logo" />
+      <h1>Recipe Generator</h1>
+      <div id="authStatus">
+        <a href="/auth/google" class="login-button">Login with Google</a>
+      </div>
     </div>
-    <script src="/index.js"></script>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h2>Find Recipes Based on What You Have</h2>
+      <p>Enter an ingredient and get delicious ideas instantly.</p>
+    </section>
+
+    <section class="search-section">
+      <input type="text" id="ingredientInput" placeholder="e.g., chicken, broccoli..." />
+      <button id="searchBtn" onclick="getRecipes()">Get Recipes</button>
+    </section>
+
+    <section id="recipeResults" class="results"></section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Recipe Generator. Built with love and flavor.</p>
+  </footer>
+
+  <script>
+    const isLoggedIn = false; // Will be updated by index.js
+  </script>
+  <script src="/index.js"></script>
 </body>
 </html>
